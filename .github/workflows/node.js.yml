@@ -1,34 +1,47 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Node.js App Deployment
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main  # Defina a branch que você deseja acionar o fluxo
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
-    
+        node-version: 14  # Defina a versão do Node.js que você está usando
+
+    - name: Install Dependencies
+      run: npm install  # ou use yarn se estiver usando o Yarn
+
+    - name: Build App
+      run: npm start # Substitua pelo comando de construção do seu aplicativo
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          sudo su
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+          . ~/.nvm/nvm.sh
+          nvm install node
+          nvm --version
+          yum install -y git
+          git clone https://github.com/rodrigosousadf/simple-nodejs-app.git
+          cd simple-nodejs-app
+          npm install
+          npm start start
+
 
   
