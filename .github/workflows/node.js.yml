@@ -34,9 +34,9 @@ jobs:
           nvm install --lts
           node -e "console.log('Running Node.js ' + process.version)"
           nvm --version
-          yum install -y git
+          sudo yum install -y git
           git clone https://github.com/rodrigosousadf/simple-nodejs-app.git
           cd simple-nodejs-app/
           npm install -y
-          npm start start
+          npm start
 
