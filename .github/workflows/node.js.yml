@@ -11,12 +11,14 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: 14  # Defina a versão do Node.js que você está usando
+        node-version: 18
+    - run: npm ci
+    - run: npm test
 
     - name: Install Dependencies
       run: npm install  # ou use yarn se estiver usando o Yarn
