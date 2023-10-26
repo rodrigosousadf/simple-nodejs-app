@@ -19,13 +19,6 @@ jobs:
         node-version: 18
     - run: npm ci
     - run: npm test
-
-    - name: Install Dependencies
-      run: npm install  # ou use yarn se estiver usando o Yarn
-
-    - name: Build App
-      run: npm start # Substitua pelo comando de construção do seu aplicativo
-
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.8
       with:
