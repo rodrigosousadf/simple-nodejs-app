@@ -45,10 +45,4 @@ jobs:
         while ! nc -z localhost 3000; do
         sleep 1
         done
-    - name: stop ec2 instance
-      uses: flyweightrocks/aws-ec2-action@v1
-      with:
-        instance-id: 'Your Instance ID'
-        wait-instance-running: true
-        stop-instance: true
 
