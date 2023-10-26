@@ -3,7 +3,7 @@ name: Node.js App Deployment
 on:
   push:
     branches:
-      - main  # Defina a branch que você deseja acionar o fluxo
+      - master # Defina a branch que você deseja acionar o fluxo
 
 jobs:
   deploy:
