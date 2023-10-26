@@ -3,7 +3,7 @@ name: Node.js App Deployment
 on:
   push:
     branches:
-      - master  # Defina a branch que você deseja acionar o flux
+      - main  # Defina a branch que você deseja acionar o fluxo
 
 jobs:
   deploy:
@@ -16,9 +16,10 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 16
+        cache: 'npm'
     - run: npm ci
-    
+
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.8
       with:
@@ -38,5 +39,3 @@ jobs:
           npm install
           npm start start
 
-
-  
