@@ -28,14 +28,13 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          sudo su
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-          . ~/.nvm/nvm.sh
-          nvm install node
-          nvm --version
-          yum install -y git
-          git clone https://github.com/rodrigosousadf/simple-nodejs-app.git
+          sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+          sudo . ~/.nvm/nvm.sh
+          sudo nvm install node
+          sudo nvm --version
+          sudo yum install -y git
+          sudo git clone https://github.com/rodrigosousadf/simple-nodejs-app.git
           cd simple-nodejs-app
-          npm install
-          npm start start
+          sudo npm install -y
+          sudo npm start start
 
