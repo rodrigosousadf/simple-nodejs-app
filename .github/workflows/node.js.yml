@@ -39,6 +39,13 @@ jobs:
           cd simple-nodejs-app/
           npm install -y
           npm start
+    - name: Start Node.js Application
+      run: npm start &
+    - name: Wait for Node.js Application to Finish
+      run: |
+        while ! nc -z localhost 3000; do
+        sleep 1
+        done
     - name: stop ec2 instance
       uses: flyweightrocks/aws-ec2-action@v1
       with:
