@@ -39,4 +39,10 @@ jobs:
           cd simple-nodejs-app/
           npm install -y
           npm start
+    - name: stop ec2 instance
+      uses: flyweightrocks/aws-ec2-action@v1
+      with:
+        instance-id: 'Your Instance ID'
+        wait-instance-running: true
+        stop-instance: true
 
